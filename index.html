@@ -94,8 +94,9 @@ body {
         <button onclick="changeMonth(1)">›</button>
     </div>
 
+    <!-- DOMINGO PRIMERO -->
     <div class="weekdays">
-        <div>L</div><div>M</div><div>X</div><div>J</div><div>V</div><div>S</div><div>D</div>
+        <div>D</div><div>L</div><div>M</div><div>X</div><div>J</div><div>V</div><div>S</div>
     </div>
 
     <div class="days" id="days"></div>
@@ -113,7 +114,8 @@ function renderCalendar() {
     const year = currentDate.getFullYear();
     const month = currentDate.getMonth();
 
-    const firstDay = new Date(year, month, 1).getDay() || 7;
+    // 0 = Domingo, 6 = Sábado
+    const firstDay = new Date(year, month, 1).getDay();
     const lastDate = new Date(year, month + 1, 0).getDate();
 
     const months = [
@@ -123,7 +125,8 @@ function renderCalendar() {
 
     monthYear.textContent = `${months[month]} ${year}`;
 
-    for (let i = 1; i < firstDay; i++) {
+    // Espacios vacíos antes del día 1
+    for (let i = 0; i < firstDay; i++) {
         const empty = document.createElement("div");
         empty.classList.add("empty");
         daysContainer.appendChild(empty);
@@ -166,4 +169,3 @@ if ("serviceWorker" in navigator) {
 
 </body>
 </html>
-
